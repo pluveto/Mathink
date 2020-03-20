@@ -22,3 +22,6 @@ On Inkscape started, click menu item `Extra->Mathink...`
 
 For the first time to click `Apply`, the main window of Mathink will appear. Now type some formula expressions in the first textbox, and click `Apply` again, you will see the formula is appened to current layer of Inkscape. Click on it, drag it with `Alt` pressed, move it to anywhere you like.
 
+## Release
+
+Goto: https://github.com/pluveto/Mathink/releases
