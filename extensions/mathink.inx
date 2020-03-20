@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<_name>Mathink</_name>
+	<id>net.incolore.mathink</id>    
+	<dependency type="executable" location="extensions">inkex.py</dependency>
+	<param name="scale" type="float" precision="1" min="0.1" max="10" gui-text="放缩系数">0.2</param>
+	<param name="out" type="string" gui-text="Mathink 输出文件">Mathink/out.d</param>  
+	<effect>
+		<object-type>all</object-type>
+	</effect>
+	<script>
+		<command reldir="extensions" interpreter="python">mathink.py</command>
+	</script>
+</inkscape-extension>

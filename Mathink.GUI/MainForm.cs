@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Windows.Forms;
 using WpfMath;
@@ -13,29 +14,31 @@ using WpfMath.Converters;
 
 namespace Mathink.GUI
 {
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MainForm : Form
     {
         public MainForm()
         {
             InitializeComponent();
         }
-        public string OutputPath { get; private set; } = "d.out.txt";
+        public string OutputPath { get; private set; }
         private void txtIn_TextChanged(object sender, EventArgs e)
         {
             slRet.Text = string.Empty;
             var latex = txtIn.Text.Trim();
             if (latex == string.Empty) return;
-            string d;
+            string svgStr;
             try
             {
-                (d, imgOut) = renderLatex(latex);
+                (svgStr, imgOut) = renderLatex(latex, false);
             }
             catch (Exception ex)
             {
                 slErr.Text = "错误: " + ex.Message;
                 return;
             }
-            File.WriteAllText(OutputPath, d);
+            File.WriteAllText(OutputPath, svgStr);
             using (var ms = new MemoryStream(imgOut))
             {
                 this.picOut.Image = Image.FromStream(ms);
@@ -76,7 +79,21 @@ namespace Mathink.GUI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            OutputPath = Application.StartupPath + Path.DirectorySeparatorChar + "out.svg";
             txtIn_TextChanged(null, null);
+            置顶窗口ToolStripMenuItem_Click(null, null);
+
+            tabPage1.Parent = null;
+            //wb.AllowWebBrowserDrop = false;
+            //wb.IsWebBrowserContextMenuEnabled = false;
+            //wb.WebBrowserShortcutsEnabled = false;
+            //wb.ObjectForScripting = this;
+            //wb.Url = new Uri(Application.StartupPath + "/editor/index.html");
+        }
+
+        public void Callback(string svgstr)
+        {
+            MessageBox.Show(svgstr);
         }
 
         private void 文件ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,13 +186,41 @@ namespace Mathink.GUI
 
         private void 复制输出路径ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Application.StartupPath + Path.DirectorySeparatorChar + OutputPath);
+            Clipboard.SetText(OutputPath);
             slRet.Text = "复制成功!";
         }
 
         private void 打开程序目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", Application.StartupPath);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.IO.File.Delete(OutputPath);
+        }
+
+        private void 清空ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtIn.Clear();
+            picOut.Image = null;
+        }
+
+        private void 置顶窗口ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.TopMost = 置顶窗口ToolStripMenuItem.Checked;
+        }
+
+        private void githubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ret = MessageBox.Show("将会打开 Github 上, 本 repo 的网页, 继续吗?", "提醒", MessageBoxButtons.OKCancel);
+            if (ret == DialogResult.Cancel) return;
+            Process.Start("https://github.com/pluveto/Mathink");
+        }
+
+        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("本产品由 Pluveto 开发, 基于 WpfMath 库. Dev by Pluveto.\n And thanks to the authors of WpfMath lib!");
         }
     }
 }
