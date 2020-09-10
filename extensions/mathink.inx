@@ -3,8 +3,8 @@
 	<_name>Mathink</_name>
 	<id>net.incolore.mathink</id>    
 	<dependency type="executable" location="extensions">inkex.py</dependency>
-	<param name="scale" type="float" precision="1" min="0.1" max="10" gui-text="放缩系数">0.2</param>
-	<param name="out" type="string" gui-text="Mathink 输出文件">Mathink/out.svg</param>  
+	<param name="scale" type="float" precision="1" min="0.1" max="10" gui-text="放缩系数 (Scale)">0.2</param>
+	<param name="out" type="string" gui-text="Mathink 输出文件 (Output file of Mathink GUI)">Mathink/out.svg</param>  
 	<effect>
 		<object-type>all</object-type>
 	</effect>
