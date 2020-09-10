@@ -79,7 +79,7 @@ if __name__ == '__main__':
         os.startfile(os.path.abspath(os.path.dirname(output_file) + "/Mathink.GUI.exe"))
         sys.exit()
     if not os.path.isfile(output_file):
-        inkex.debug("file not found: " + output_file)
+        inkex.utils.debug("file not found: " + output_file)
         sys.exit()
     # with open(output_file, 'r') as file:
     #     svgstr = file.read()
