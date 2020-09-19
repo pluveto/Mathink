@@ -8,7 +8,7 @@ Inkscape math symbols / formula editor with latex/tex syntax. **Latex Env not re
 
 ## 使用方法
 
-到 `Release` 下载本工具. 你会得到 `extensions.zip` 文件, 将其中的内容解压到 Inkscape 的插件目录, 例如 `C:\Program Files\Inkscape\share\extensions`. 使得 `mathink.inx` 和其它插件的`inx` 文件同级, 然后重启 `Inkscape`.
+到 `Release` 下载本工具. 你会得到 `extensions.zip` 文件, 将其中的内容解压到 Inkscape 的插件目录, 例如 `C:\Program Files\Inkscape\share\inkscape\extensions`. 使得 `mathink.inx` 和其它插件的`inx` 文件同级, 然后重启 `Inkscape`.
 
 运行 Inkscape, 在菜单中, 选择`扩展->Mathink...`
 
@@ -16,7 +16,7 @@ Inkscape math symbols / formula editor with latex/tex syntax. **Latex Env not re
 
 ## Usage
 
-Download `extensions.zip` from `Release`. Unzip files to extensions folder for Inkscape, for me it is  `C:\Program Files\Inkscape\share\extensions`. After doing so, `mathink.ink` will be in the same directory level of other `inx` files. Relaunch Inkscape.
+Download `extensions.zip` from `Release`. Unzip files to extensions folder for Inkscape, for me it is  `C:\Program Files\Inkscape\share\inkscape\extensions`. After doing so, `mathink.ink` will be in the same directory level of other `inx` files. Relaunch Inkscape.
 
 On Inkscape started, click menu item `Extra->Mathink...`
 
